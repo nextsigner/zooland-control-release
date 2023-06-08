@@ -15,7 +15,7 @@ Rectangle {
     id: r
     width: xApp.width-app.fs*17
     height: xApp.height//zsm.getPanel('ZoolFileManager').hp
-    visible: true
+    visible: false
     color: apps.backgroundColor
     border.width: 2
     border.color: apps.fontColor
@@ -505,7 +505,7 @@ Rectangle {
                     if(app.dev){
                         log.lv('New remote params, id: '+j.params._id)
                     }
-                    app.j.showMsgDialog('Zool Informa', 'Los datos se han guardado.', 'Una copia del archivo '+app.currentNom+' ha sido respaldado en el servidor de Zool.')
+                    app.j.showMsgDialog('Zool Informa', 'Se ha agregado los datos externos al documento remoto.')
                 }else{
                     app.j.showMsgDialog('Zool Informa Error!', 'Los datos no han sido guardados.', j.msg)
                 }
@@ -517,7 +517,7 @@ Rectangle {
     }
     function sendNewParams(){
         let ms=new Date(Date.now()).getTime()
-        let n=tiNombre.text
+        let n='Tránsitos Planetarios'//tiNombre.text
         let d=controlTimeFecha.dia
         let m=controlTimeFecha.mes
         let a=controlTimeFecha.anio
@@ -532,7 +532,7 @@ Rectangle {
         //let url=apps.host
         //let url=zcsfdm.host
         let url=zcsfdm.host+':8100'
-        url+='/zool/saveZoolParams'
+        url+='/zool/saveZoolExt'
         url+='?n='+n
         url+='&d='+d
         url+='&m='+m
@@ -548,8 +548,9 @@ Rectangle {
         url+='&adminId='+apps.zoolUserId
         url+='&msReq='+ms
         url+='&msmod='+ms
-        url+='&tipo=vn'
-        console.log('Url  saveZoolParams: '+url)
+        url+='&tipo=trans'
+        url+='&docId='+app.currentDocId
+        console.log('Url  saveZoolExt: '+url)
         app.j.getRD(url, saveZoolParams)
     }
     //<-- Save Zooland Params

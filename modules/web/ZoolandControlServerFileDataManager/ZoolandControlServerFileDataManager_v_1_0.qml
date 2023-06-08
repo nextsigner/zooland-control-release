@@ -4,8 +4,11 @@ Item{
     id: r
 
 
-    property string host: app.dev?'http://zooldev.loca.lt':apps.host
+    //property string host: app.dev?'http://localhost:8100':apps.host
     //property string host: apps.host
+
+    property string host: 'http://vps-3339713-x.dattaweb.com'
+    //property string host: 'http://localhost'
 
     QtObject{
         id: saveZoolParams
@@ -129,6 +132,7 @@ Item{
         id: setZoolandParamsList
         function setData(data, isData){
             //Qt.quit()
+            log.lv('Data: '+isData)
             if(app.dev){
                 //log.lv('setZoolandParamsList:\n'+JSON.stringify(JSON.parse(data), null, 2))
                 //console.log('setZoolandParamsList data: '+data)
@@ -136,17 +140,18 @@ Item{
             if(isData){
                 let j=JSON.parse(data)
                 //log.lv('setZoolandParamsLis(): '+JSON.stringify(j))
-                zsm.getPanel('ZoolRemoteParamsList').load(j)
+                zoolFileManager.getSection('ZoolRemoteParamsList').load(j)
             }
         }
     }
     function getZoolandParamsList(){
         let msReq=new Date(Date.now()).getTime()
         //let url=apps.host
-        let url=r.host
+        let url=r.host+':8100'
         url+='/zool/getZoolandParamsList'
-        url+='?adminId='+apps.zoolUser+'&r='+msReq
+        url+='?adminId='+apps.zoolUserId+'&r='+msReq
         app.j.getRD(url, setZoolandParamsList)
+        console.log('url getZoolandParamsList(): '+url)
     }
     //<-- Get Data Params List
 

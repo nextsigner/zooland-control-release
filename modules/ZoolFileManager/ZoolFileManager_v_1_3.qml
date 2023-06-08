@@ -4,6 +4,8 @@ import Qt.labs.settings 1.1
 import "../../comps" as Comps
 
 import ZoolFileMaker 1.4
+import ZoolRemoteParamsList 1.0
+import ZoolFileAddTransNow 1.0
 //import ZoolFileExtDataManager 1.2
 //import ZoolFileLoader 1.3
 //import ZoolFileTransLoader 1.2
@@ -95,29 +97,22 @@ Rectangle {
                     //app.setTabIndex()
                 }
             }
+            ZoolButton{
+                text:'Seleccionar'
+                colorInverted: zoolRemoteParamsList.visible
+                onClicked: {
+                    showSection('ZoolRemoteParamsList')
+                }
+            }
+            ZoolButton{
+                text:'Trans. Ahora'
+                colorInverted: zoolFileAddTransNow.visible
+                visible: app.currentDocId!==''
+                onClicked: {
+                    showSection('ZoolFileAddTransNow')
+                }
+            }
 
-            //                ZoolButton{
-            //                    text:'Buscar'
-            //                    colorInverted: zoolFileLoader.visible
-            //                    onClicked: {
-            //                        showSection('ZoolFileLoader')
-            //                    }
-            //                }
-            //                ZoolButton{
-            //                    text:'Transitos'
-            //                    colorInverted: zoolFileTransLoader.visible
-            //                    onClicked: {
-            //                        showSection('ZoolFileTransLoader')
-            //                    }
-            //                }
-            //                ZoolButton{
-            //                    id: botDirPrim
-            //                    text:'Direcciones'
-            //                    colorInverted: zoolFileDirPrimLoader.visible
-            //                    onClicked: {
-            //                        showSection('ZoolFileDirPrimLoader')
-            //                    }
-            //                }
 
         }
     }
@@ -128,6 +123,15 @@ Rectangle {
         ZoolFileMaker{
             id: zoolFileMaker;
             //visible: true
+            height: r.height
+        }
+        ZoolRemoteParamsList{
+            id: zoolRemoteParamsList;
+            //visible: true
+            height: r.height
+        }
+        ZoolFileAddTransNow{
+            id: zoolFileAddTransNow;
             height: r.height
         }
 

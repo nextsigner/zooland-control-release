@@ -4,6 +4,7 @@ import QtQuick.Controls 2.0
 import Qt.labs.settings 1.1
 import "./js/Funcs_v2.js" as JS
 
+import unik.Unik 1.0
 import ZoolFileManager 1.3
 import web.ZoolandControlServerFileDataManager 1.0
 import comps.ZoolLogView 1.0
@@ -17,13 +18,56 @@ ApplicationWindow{
     property var j: JS
     property date currentDate
 
-    property int currentMando: 0
+    property string currentDocId: ''
 
+    property int currentMando: 0
+    Unik{
+        id: unik
+
+//        onUkStdChanged: {
+//            let std=ukStd
+//            std=std.replace(/&quot;/g, '"')
+//            if(std.indexOf('download git ')<0 && std.indexOf("Git Zip not downloaded.")<0 && std.indexOf("Local Folder:")<0){
+//                app.log(std)
+//            }else if(std.indexOf("Git Zip not downloaded.")>=0){
+//                app.log('Error al descargar el paquete Zooland.')
+//                app.log('Fallo al intentar descargar el paquete '+apps.uZoolandZipAvailable)
+//            }else if(std.indexOf("Local Folder:")>=0){
+//                app.log('El paquete ya se ha descomprimido.')
+//                app.log('Ahora puedes lanzar la aplicación.')
+//                //pb.value=0
+//            }else{
+//                let m0=std.split('%')
+//                let p=parseInt(m0[1])
+//                pb.value=p
+//                if(p>=100){
+//                    let v=apps.uZoolandZipAvailable.split('_v')[1].replace('.zip', '')
+//                    apps.uZoolandNumberVersionDownloaded=v
+//                    //app.log('Aplicación Actualizada')
+//                    app.log('Paquete descargado.')
+//                    app.log('Paquete de Zooland N°'+v)
+//                    app.log('Descomprimiendo el paquete...')
+//                    app.log('Por favor espere.')
+//                    tPbToZero.restart()
+//                }
+//            }
+//            flk.contentY=flk.contentHeight-flk.height
+//        }
+
+        Component.onCompleted: {
+            unik.setEngine(engine)
+        }
+    }
     Settings{
         id: apps
+        fileName: unik.getPath(4)+'/zooland-control-release.cfg'
         //property string minymaClientHost: 'ws://192.168.1.51'
         //property int minymaClientPort: 12345
+        //Component.objectName: console.log('cfg: '+fileName)
         property color fontColor: 'white'
+
+        property string zoolUserId: 'public'
+
         property color backgroundColor: 'black'
         property string host: 'http://localhost'
 
