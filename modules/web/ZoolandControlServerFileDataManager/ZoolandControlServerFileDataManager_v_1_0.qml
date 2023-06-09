@@ -3,12 +3,7 @@ import QtQuick 2.0
 Item{
     id: r
 
-
-    //property string host: app.dev?'http://localhost:8100':apps.host
-    //property string host: apps.host
-
-    property string host: 'http://vps-3339713-x.dattaweb.com'
-    //property string host: 'http://localhost'
+    property string host
 
     QtObject{
         id: saveZoolParams
@@ -32,6 +27,19 @@ Item{
             }
         }
     }
+    Component.onCompleted: {
+        let fp=unik.getPath(4)+'/host'
+        let h=unik.getFile(fp)//.replace(/ /g, '').replace(/\n/g, '')
+        if(h==='' || h.lenght < 3){
+            h='http://zool.loca.lt'
+        }
+        if(!app.dev){
+            r.host=h
+        }else{
+            r.host='http://localhost'
+        }
+    }
+
     function save(j){
         let t=j.params.tipo
         let hsys=j.params.hsys
