@@ -36,7 +36,8 @@ Item{
         if(!app.dev){
             r.host=h
         }else{
-            r.host='http://localhost'
+            //r.host='http://localhost'
+            r.host='http://vps-3339713-x.dattaweb.com'
         }
     }
 
@@ -189,10 +190,7 @@ Item{
     //<-- Get Data Coords
 
 
-    Component.onCompleted: {
-//        let sj='{"params":{"tipo":"vn","ms":1633701422850,"n":"Ricardo","d":20,"m":6,"a":1975,"h":23,"min":4,"gmt":-3,"lat":-35.4752134,"lon":-69.585934,"ciudad":"Malargue Mendoza Argentina","msmod":1681568075071}}'
-//        loadParamsFromString(sj)
-    }
+
     function loadParamsFromString(s){        {
                 let j=JSON.parse(s)
                 //ñalskdfjñla

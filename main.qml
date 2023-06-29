@@ -14,6 +14,7 @@ ApplicationWindow{
     visible: true
     visibility: "Maximized"
     color:"black"
+    property bool dev: false
     property int fs: Screen.width*0.03
     property var j: JS
     property date currentDate
@@ -69,7 +70,7 @@ ApplicationWindow{
         property string zoolUserId: 'public'
 
         property color backgroundColor: 'black'
-        property string host: 'http://localhost'
+        property string host: 'http://vps-3339713-x.dattaweb.com'//'http://localhost'
 
     }
     Item{
@@ -124,6 +125,7 @@ ApplicationWindow{
         onActivated: app.down()
     }
     Component.onCompleted: {
+        if(Qt.application.arguments.indexOf('-dev')>=0)app.dev=true
         //zoolFileManager.showSection('ZoolFileMaker')
     }
 

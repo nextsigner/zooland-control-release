@@ -488,7 +488,11 @@ Rectangle {
         //let url='http://localhost:8100'
         url+='/zool/getZoolandCoords'
         url+='?ciudad='+ciudad+'&r='+msReq
-        app.j.getRD(url, setZoolandCoords)
+        url=url.replace(/\n/g, '')
+        url=url.replace(/\r/g, '')
+        url=url.replace(/ /g, '%20')
+        log.lv('url: '+url)
+        app.j.getRD(""+url+"", setZoolandCoords)
     }
     //<-- Get Data Coords
 
@@ -497,7 +501,8 @@ Rectangle {
         id: saveZoolParams
         function setData(data, isData){
             //if(app.dev){
-                log.lv('getUserAndSet:\n'+JSON.stringify(JSON.parse(data), null, 2))
+                //log.lv('saveZoolParams:\n'+JSON.stringify(JSON.parse(data), null, 2))
+            log.lv('saveZoolParams isData:'+isData)
             //}
             if(isData){
                 let j=JSON.parse(data)
@@ -549,8 +554,11 @@ Rectangle {
         url+='&msReq='+ms
         url+='&msmod='+ms
         url+='&tipo=vn'
+        url=url.replace(/\n/g, '')
+        url=url.replace(/\r/g, '')
+        url=url.replace(/ /g, '%20')
         console.log('Url  saveZoolParams: '+url)
-        app.j.getRD(url, saveZoolParams)
+        app.j.getRD(""+url+"", saveZoolParams)
     }
     //<-- Save Zooland Params
 
